@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Carrodecompras2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
+
+=begin
+
+REVISAR AGAIN COMO PONER PICTURES 
+
+Revisar las rutas
+crear archivo nuevo _navbar.html.erb en el editor
+Agregar  navbar en la página de bootstrap
+rails routes revisar rutas 
+
+Usar gema Devise
+rails g devise User 
+
+en la migracion de mil numeros
+agregar
+ 
+t.string :avatar 
+t.string 
+
+en el esquema poner todos los tipos de contenidos
+t. string email
+t.datetime
+
+
+
+then rails db:migrate
+usar consola rails c
+probaar con User 
+revisar qué tipo de contenidos son 
+
+Hacer scaffold
+rails g scaffold Task title picture
+
+En el navbar crear el link a la ruta de usuario para ingresar nuevo usuario
+en el archivo de navbar.html.erb agregar en el div, ruta Ruby <&= de link_to 'Register', new_user_registration_path, class: "nav.link"
+rails db:migrate 
+el navbar sale negro porque el scaffold crea un archivo en el css que lo deja automaticamente asi (al 'register') por lo tanto hay que eliminarlo en el archivo
+
+devise_for :users,{
+  registrations: 'users/registrations'
+}
+
+en routes poner: 
+rouseces :tasks
+devise_for :users
+root 'pages#home'
+
+en new.html.erb crear un container nuevo div class="container"
+h1> sign up </
+Cambiar botones y espaciado
+render devise revisar
+
+en consola, una vez probado el sign up con cualquier mail y password, poner User.last y revisar
+una vez que se pueda ingresar nuevo usuario, revisar link de navbar
+agregar el mismo link de Register dentro de ese archivo, ponerlo mas abajo en el mismo container pero reemplazando 'register' por 'New task' (ojo revisar orden de este primero o register) probar que funcione
+
+en _form.html.erb
+editar 'field' por "form-group", cambiar el ultimo de eso por "action" por un boton negro o de ingreso para el "submit"
+
+en new.html.erb (de new task)
+agregar container para todas las partes y corregir espaciado y botones
+
+Hacer tabla
+rails g migration CreateTasksUsers user_id:integer task_id:integer state:boolean completed_at:datetime
+
+en consola crear t = Task.new(title: 'choripanes o cualquier wea')
+una vez creado. poner t.save
+task.count
+t = Task.last
+User.last
+u crear variable para User
+
+
+en User.rb
+poner dentro de la clase Devise :database_aunthenticable y los miles de : que son para devise
+poner arriba has_and_belongs_to_many :tasks
+
+en task la misma weá pero con users
+u.tasks << t2
+
+u.tasks.last.completed_at = Time.now
+
+despues de probar con el find_by y todos esos
+probar con tu = _
+tu
+tu.state = 1 
+tu.completed_at = Time.now
+tu.save
+y que dé true porque es un boolean
+
+
+rails g migration addCreateAtToTasksUsers
+en el archivo creado poner add_column :tasks_users, :created_at, :datetime
+
+
+
+
+en routas.rb poner resources :users
+
+=end
